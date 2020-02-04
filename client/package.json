@@ -1,0 +1,68 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "3box": "^1.16.1",
+    "@drizzle/store": "^1.5.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "drizzle": "^1.4.0",
+    "drizzle-react": "^1.3.0",
+    "drizzle-react-components": "^1.4.0",
+    "react": "^16.12.0",
+    "react-content-loader": "^5.0.1",
+    "react-dom": "^16.12.0",
+    "react-rainbow-components": "^1.12.0",
+    "react-scripts": "3.3.1",
+    "rimble-ui": "^0.11.1",
+    "styled-components": "^5.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "standard --verbose | snazzy",
+    "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | xargs standard | snazzy",
+    "fixcode": "standard --fix",
+    "git-hook": "npm run lint"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^4.2.1",
+    "snazzy": "^8.0.0",
+    "standard": "^14.3.1"
+  },
+  "standard": {
+    "ignore": [
+      "**/out/",
+      "/lib/select2/",
+      "/lib/ckeditor/",
+      "tmp.js",
+      "*.test.js",
+      "serviceWorker.js"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run git-hook",
+      "pre-push": "npm run git-hook"
+    }
+  }
+}
