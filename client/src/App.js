@@ -2,17 +2,11 @@ import React, { useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
 import AppMenu from './components/AppMenu'
-import { Button, Card, Input, Textarea, Chip, DateTimePicker, RadioButtonGroup, Modal } from 'react-rainbow-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faCheck, faArrowRight, faPlus } from '@fortawesome/free-solid-svg-icons';
-
+import { Button, Card, Input, Textarea, Chip, DateTimePicker, Modal } from 'react-rainbow-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 /* global alert */
-
-const options = [
-  { value: 'private', label: 'Private' },
-  { value: 'public', label: 'Public' }
-]
 
 const okButtonLocalizedLabel = {
   'en-US': 'OK',
@@ -31,7 +25,7 @@ function App (props) {
   const [address, setAddress] = useState('')
   const [value, setValue] = useState(new Date('2019-10-25 10:44'))
   const [locale] = useState({ name: 'en-US', label: 'English (US)' })
-  const [access, setAccess] = useState('private')
+  // const [access, setAccess] = useState('private')
   const { drizzle } = props
   drizzle.store.subscribe(() => {
     const drizzleState = drizzle.store.getState()
@@ -41,7 +35,7 @@ function App (props) {
     <div className='App'>
       <AppMenu />
       <div style={{ width: 'calc(100vw - 240px)' }}>
-        <Navbar address={address}/>
+        <Navbar address={address} />
         <div style={{
           boxShadow: 'inset 20px 20px 30px rgba(0,0,0,0.05)',
           height: 'calc(100vh - 50px - 4rem)',
@@ -118,38 +112,38 @@ function App (props) {
                   </label>
                 </div>
                 <div style={{ marginBottom: 25, textAlign: 'initial' }}>
-                <div style={{ display: 'inline-flex' }} onClick={() => { setOpen(true) }}>
-                  <Chip 
-                    style={{ marginLeft: 0 }}
-                    className='rainbow-m-around_medium'
-                    label='Candidate 1'
-                    variant='neutral'
+                  <div style={{ display: 'inline-flex' }} onClick={() => { setOpen(true) }}>
+                    <Chip
+                      style={{ marginLeft: 0 }}
+                      className='rainbow-m-around_medium'
+                      label='Candidate 1'
+                      variant='neutral'
                     // onDelete={() => alert('Delete Chip!')}
-                  />
-                </div>
-                <div style={{ display: 'inline-flex' }} onClick={() => { setOpen(true) }}>
-                  <Chip 
-                    className='rainbow-m-around_medium'
-                    label='Candidate 2'
-                    variant='neutral'
+                    />
+                  </div>
+                  <div style={{ display: 'inline-flex' }} onClick={() => { setOpen(true) }}>
+                    <Chip
+                      className='rainbow-m-around_medium'
+                      label='Candidate 2'
+                      variant='neutral'
                     // onDelete={() => alert('Delete Chip!')}
-                  />
-                </div>
-                  
-                  <Button style={{ marginLeft: 8 }} onClick={() => { setOpen(true) }} variant="neutral">
+                    />
+                  </div>
+
+                  <Button style={{ marginLeft: 8 }} onClick={() => { setOpen(true) }} variant='neutral'>
                       Add option
-                      <FontAwesomeIcon icon={faPlus} style={{ marginLeft: 15 }} />
+                    <FontAwesomeIcon icon={faPlus} style={{ marginLeft: 15 }} />
                   </Button>
                 </div>
 
-                {/*<div style={{ marginTop: 25 }}>
+                {/* <div style={{ marginTop: 25 }}>
                   <RadioButtonGroup
                     options={options}
                     value={access}
                     onChange={event => setAccess(event.target.value)}
                     label='Voters Access'
                   />
-                </div>*/}
+                </div> */}
               </div>
 
               <div style={{ marginTop: 50, display: 'flex', width: '60%', justifyContent: 'flex-end' }}>
@@ -166,29 +160,28 @@ function App (props) {
       </div>
 
       <Modal
-        title="Add Option"
+        title='Add Option'
         isOpen={open}
         onRequestClose={() => { setOpen(false) }}
         footer={
-            <div className="rainbow-flex rainbow-justify_end">
-                <Button
-                    form="redux-form-id"
-                    className="rainbow-m-right_large"
-                    label="Cancel"
-                    variant="neutral"
-                    onClick={() => { setOpen(false) }}
-                />
-                <Button
-                    form="redux-form-id"
-                    label="Save"
-                    variant="brand"
-                    type="submit"
-                    onClick={() => { setOpen(false) }}
-                />
-            </div>
+          <div className='rainbow-flex rainbow-justify_end'>
+            <Button
+              form='redux-form-id'
+              className='rainbow-m-right_large'
+              label='Cancel'
+              variant='neutral'
+              onClick={() => { setOpen(false) }}
+            />
+            <Button
+              form='redux-form-id'
+              label='Save'
+              variant='brand'
+              type='submit'
+              onClick={() => { setOpen(false) }}
+            />
+          </div>
         }
-      >
-      </Modal>
+      />
 
     </div>
   )
