@@ -11,7 +11,6 @@ contract Voting {
     struct Voter {
         uint weight; // weight is accumulated by delegation
         bool voted;  // if true, that person already voted
-        address delegate; // person delegated to
         uint vote;   // index of the voted proposal
     }
 
@@ -81,6 +80,8 @@ contract Voting {
         Voter storage sender = voters[msg.sender];
         require(sender.weight != 0, "Has no right to vote");
         require(!sender.voted, "Already voted.");
+        require(startDate < block.timestamp && block.timestamp < endDate, "");
+
         sender.voted = true;
         sender.vote = proposal;
 

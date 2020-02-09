@@ -17,6 +17,7 @@ contract VotingFactory {
   uint public contractsCreated;
 
   function newVotingInstance(string memory _name, bytes32[] memory proposalNames, uint _startDate, uint _endDate) public returns(address) {
+    require(proposalNames.length > 2, "");
     bytes32 _id = keccak256(abi.encodePacked(msg.sender, _name));
     require(votingContracts[msg.sender][_id].instanceExists == false, "There is already a Voting with this name");
     Voting newVotingContract = new Voting(msg.sender, proposalNames, _startDate, _endDate);
