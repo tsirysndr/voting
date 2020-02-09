@@ -2,14 +2,11 @@ import React, { useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
 import AppMenu from './components/AppMenu'
-import { Button, Card, Input, Textarea, Chip, DateTimePicker, RadioButtonGroup } from 'react-rainbow-components'
+import { Button, Card, Input, Textarea, Chip, DateTimePicker, Modal } from 'react-rainbow-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 /* global alert */
-
-const options = [
-  { value: 'private', label: 'Private' },
-  { value: 'public', label: 'Public' }
-]
 
 const okButtonLocalizedLabel = {
   'en-US': 'OK',
@@ -23,15 +20,22 @@ const cancelButtonLocalizedLabel = {
   'fr-Fr': 'Annuler'
 }
 
-function App () {
+function App (props) {
+  const [open, setOpen] = useState(false)
+  const [address, setAddress] = useState('')
   const [value, setValue] = useState(new Date('2019-10-25 10:44'))
   const [locale] = useState({ name: 'en-US', label: 'English (US)' })
-  const [access, setAccess] = useState('private')
+  // const [access, setAccess] = useState('private')
+  const { drizzle } = props
+  drizzle.store.subscribe(() => {
+    const drizzleState = drizzle.store.getState()
+    setAddress(drizzleState.accounts['0'])
+  })
   return (
     <div className='App'>
       <AppMenu />
       <div style={{ width: 'calc(100vw - 240px)' }}>
-        <Navbar />
+        <Navbar address={address} />
         <div style={{
           boxShadow: 'inset 20px 20px 30px rgba(0,0,0,0.05)',
           height: 'calc(100vh - 50px - 4rem)',
@@ -46,7 +50,7 @@ function App () {
             maxWidth: 920
           }}
           >
-            <Card style={{ minHeight: 'calc(100vh - 150px)', border: 'none', paddingBottom: 60 }}>
+            <Card style={{ display: 'flex', minHeight: 'calc(100vh - 150px)', border: 'none', paddingBottom: 60, alignItems: 'center', flexDirection: 'column' }}>
               <div style={{
                 color: '#9cc717',
                 height: 80,
@@ -59,8 +63,10 @@ function App () {
               >
                 Create new vote
               </div>
-              <div style={{ width: '50%', marginLeft: 50 }}>
+              <div style={{ width: '60%' }}>
                 <Input
+                  required
+                  style={{ textAlign: 'left' }}
                   label='Title'
                   placeholder=''
                 />
@@ -71,7 +77,31 @@ function App () {
                     placeholder=''
                   />
                 </div>
-                <div style={{ marginTop: 25 }}>
+                <div style={{ marginTop: 25, display: 'flex', flexDirection: 'row' }}>
+                  <div>
+                    <DateTimePicker
+                      label='Start'
+                      value={value}
+                      onChange={value => setValue(value)}
+                      formatStyle='large'
+                      locale={locale.name}
+                      okLabel={okButtonLocalizedLabel[locale.name]}
+                      cancelLabel={cancelButtonLocalizedLabel[locale.name]}
+                    />
+                  </div>
+                  <div style={{ marginLeft: 15 }}>
+                    <DateTimePicker
+                      label='End'
+                      value={value}
+                      onChange={value => setValue(value)}
+                      formatStyle='large'
+                      locale={locale.name}
+                      okLabel={okButtonLocalizedLabel[locale.name]}
+                      cancelLabel={cancelButtonLocalizedLabel[locale.name]}
+                    />
+                  </div>
+                </div>
+                <div style={{ marginTop: 25, display: 'flex', alignItems: 'flex-start' }}>
                   <label style={{
                     color: '#576574',
                     fontSize: '0.875rem',
@@ -81,69 +111,44 @@ function App () {
                   >Options
                   </label>
                 </div>
-                <div style={{ marginBottom: 25 }}>
-                  <Chip
-                    className='rainbow-m-around_medium'
-                    label='Chip base'
-                    onDelete={() => alert('Delete Chip!')}
-                  />
+                <div style={{ marginBottom: 25, textAlign: 'initial' }}>
+                  <div style={{ display: 'inline-flex' }} onClick={() => { setOpen(true) }}>
+                    <Chip
+                      style={{ marginLeft: 0 }}
+                      className='rainbow-m-around_medium'
+                      label='Candidate 1'
+                      variant='neutral'
+                    // onDelete={() => alert('Delete Chip!')}
+                    />
+                  </div>
+                  <div style={{ display: 'inline-flex' }} onClick={() => { setOpen(true) }}>
+                    <Chip
+                      className='rainbow-m-around_medium'
+                      label='Candidate 2'
+                      variant='neutral'
+                    // onDelete={() => alert('Delete Chip!')}
+                    />
+                  </div>
 
-                  <Chip
-                    className='rainbow-m-around_medium'
-                    label='Chip Neutral'
-                    variant='neutral'
-                    onDelete={() => alert('Delete Chip!')}
-                  />
-
-                  <Chip
-                    className='rainbow-m-around_medium'
-                    label='Chip Outline Brand'
-                    variant='outline-brand'
-                    onDelete={() => alert('Delete Chip!')}
-                  />
-
-                  <Chip
-                    className='rainbow-m-around_medium'
-                    label='Chip Brand'
-                    variant='brand'
-                    onDelete={() => alert('Delete Chip!')}
-                  />
+                  <Button style={{ marginLeft: 8 }} onClick={() => { setOpen(true) }} variant='neutral'>
+                      Add option
+                    <FontAwesomeIcon icon={faPlus} style={{ marginLeft: 15 }} />
+                  </Button>
                 </div>
 
-                <div style={{ marginTop: 25 }}>
-                  <DateTimePicker
-                    label='Start'
-                    value={value}
-                    onChange={value => setValue(value)}
-                    formatStyle='large'
-                    locale={locale.name}
-                    okLabel={okButtonLocalizedLabel[locale.name]}
-                    cancelLabel={cancelButtonLocalizedLabel[locale.name]}
-                  />
-                </div>
-                <div style={{ marginTop: 25 }}>
-                  <DateTimePicker
-                    label='End'
-                    value={value}
-                    onChange={value => setValue(value)}
-                    formatStyle='large'
-                    locale={locale.name}
-                    okLabel={okButtonLocalizedLabel[locale.name]}
-                    cancelLabel={cancelButtonLocalizedLabel[locale.name]}
-                  />
-                </div>
-                <div style={{ marginTop: 25 }}>
+                {/* <div style={{ marginTop: 25 }}>
                   <RadioButtonGroup
                     options={options}
                     value={access}
                     onChange={event => setAccess(event.target.value)}
                     label='Voters Access'
                   />
-                </div>
+                </div> */}
               </div>
 
-              <div style={{ marginTop: 50 }}>
+              <div style={{ marginTop: 50, display: 'flex', width: '60%', justifyContent: 'flex-end' }}>
                 <Button
+                  style={{ width: 150 }}
                   label='Launch'
                   onClick={() => alert('clicked!')}
                   variant='brand'
@@ -153,6 +158,31 @@ function App () {
           </div>
         </div>
       </div>
+
+      <Modal
+        title='Add Option'
+        isOpen={open}
+        onRequestClose={() => { setOpen(false) }}
+        footer={
+          <div className='rainbow-flex rainbow-justify_end'>
+            <Button
+              form='redux-form-id'
+              className='rainbow-m-right_large'
+              label='Cancel'
+              variant='neutral'
+              onClick={() => { setOpen(false) }}
+            />
+            <Button
+              form='redux-form-id'
+              label='Save'
+              variant='brand'
+              type='submit'
+              onClick={() => { setOpen(false) }}
+            />
+          </div>
+        }
+      />
+
     </div>
   )
 }

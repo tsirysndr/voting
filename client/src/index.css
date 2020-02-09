@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+label {
+  align-self: flex-start !important;
+  margin-left: 15px !important;
+}
+.rainbow-m-around_medium {
+  cursor: pointer;
+}
+
+.rainbow-justify_end {
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.rainbow-flex {
+  display: flex;
+}
+
+.rainbow-m-around_medium {
+  margin-left: 8px !important;
+  margin-right: 8px !important;
+}
