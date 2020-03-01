@@ -5,25 +5,15 @@ import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
-// import drizzle functions and contract artifact
-import { Drizzle } from '@drizzle/store'
-import VotingFactory from './contracts/VotingFactory.json'
+import { DrizzleProvider } from "@drizzle/react-plugin";
+import store from './middleware'
+import drizzleOptions from "./drizzleOptions"
 
-// let drizzle know what contracts we want and how to access our test blockchain
-const options = {
-  contracts: [VotingFactory],
-  web3: {
-    fallback: {
-      type: 'ws',
-      url: 'ws://127.0.0.1:9545'
-    }
-  }
-}
-
-// setup the drizzle store and drizzle
-const drizzle = new Drizzle(options)
-
-ReactDOM.render(<App drizzle={drizzle} />, document.getElementById('root'))
+ReactDOM.render(
+  <DrizzleProvider store={store} options={drizzleOptions}>
+    <App />
+  </DrizzleProvider> 
+, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
