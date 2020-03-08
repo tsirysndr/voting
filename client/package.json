@@ -19,7 +19,9 @@
     "react": "^16.12.0",
     "react-content-loader": "^5.0.1",
     "react-dom": "^16.12.0",
+    "react-md": "^1.16.0",
     "react-rainbow-components": "^1.12.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.1",
     "react-toastify": "^5.5.0",
     "redux-form": "^8.3.0",
@@ -67,9 +69,6 @@
     ]
   },
   "husky": {
-    "hooks": {
-      "pre-commit": "npm run git-hook",
-      "pre-push": "npm run git-hook"
-    }
+    "hooks": {}
   }
 }

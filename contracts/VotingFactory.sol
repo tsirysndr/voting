@@ -18,8 +18,8 @@ contract VotingFactory {
   uint public contractsCreated;
   event VotingCreated(string _title, address _contract);
 
-  function newVotingInstance(string memory _name, string memory _description, bytes32[] memory proposalNames, uint _startDate, uint _endDate) public returns(address) {
-    require(proposalNames.length > 2, "");
+  function newVotingInstance(string memory _name, string memory _description, bytes32[] memory proposalNames, uint _startDate, uint _endDate) public  {
+    require(proposalNames.length >= 2, "");
     bytes32 _id = keccak256(abi.encodePacked(msg.sender, _name));
     require(votingContracts[msg.sender][_id].instanceExists == false, "There is already a Voting with this name");
     Voting newVotingContract = new Voting(msg.sender, proposalNames, _startDate, _endDate);
@@ -31,7 +31,6 @@ contract VotingFactory {
     votingContracts[msg.sender][_id] = newVoting;
     contractsCreated++;
     emit VotingCreated(_name, deployedAddress);
-    return deployedAddress;
   }
   
 }

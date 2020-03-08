@@ -33,3 +33,18 @@ label {
   margin-left: 8px !important;
   margin-right: 8px !important;
 }
+
+.md-paper--1 {
+  box-shadow: initial;
+  width: 450px;
+}
+
+.md-text {
+  text-align: initial;
+  color: rgba(0,0,0,0.67);
+  font-size: 18px;
+}
+
+.md-fake-btn  {
+  height: 60px;
+}

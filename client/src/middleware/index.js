@@ -9,18 +9,19 @@ const contractEventNotifier = store => next => action => {
     const message = action.event.returnValues._message
     const display = `${contract}(${contractEvent}): ${message}`
 
+    console.log('[event]', display)
+
     toast.success(display, { position: toast.POSITION.TOP_RIGHT })
   }
   return next(action)
 }
 
-
-const appMiddlewares = [ contractEventNotifier ]
+const appMiddlewares = [contractEventNotifier]
 
 const store = generateStore({
   drizzleOptions,
   appMiddlewares,
-  disableReduxDevTools: false  // enable ReduxDevTools!
+  disableReduxDevTools: false // enable ReduxDevTools!
 })
 
 // Use the store with DrizzleProvider
