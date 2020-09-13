@@ -34,7 +34,7 @@ const App = (props, context) => {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
   const [locale] = useState({ name: 'en-US', label: 'English (US)' })
-  const [candidates, setCandidates] = useState([{ id: 1, name: 'Candidate 1' }, { id: 2, name: 'Candidate 2' }])
+  const [candidates, setCandidates] = useState([{ id: 1, name: 'Candidat 1' }, { id: 2, name: 'Candidat 2' }])
   const [update, setUpdate] = useState(false)
   const [candidate, setCandidate] = useState({
     id: 1,
@@ -142,13 +142,13 @@ const App = (props, context) => {
                 fontSize: 25
               }}
               >
-                Create an Election
+                Créer une élection 
               </div>
               <div style={{ width: '60%' }}>
                 <Input
                   required
                   style={{ textAlign: 'left' }}
-                  label='Title'
+                  label='Titre'
                   placeholder=''
                   onChange={evt => setTitle(evt.target.value)}
                 />
@@ -164,7 +164,7 @@ const App = (props, context) => {
                   <div>
                     <DateTimePicker
                       required
-                      label='Start Date'
+                      label='Début'
                       value={startDate}
                       onChange={value => setStartDate(value)}
                       formatStyle='large'
@@ -177,7 +177,7 @@ const App = (props, context) => {
                   <div style={{ marginLeft: 15 }}>
                     <DateTimePicker
                       required
-                      label='End Date'
+                      label='Fin'
                       value={endDate}
                       onChange={value => setEndDate(value)}
                       formatStyle='large'
@@ -232,7 +232,7 @@ const App = (props, context) => {
                       setCandidate({})
                     }} variant='neutral'
                   >
-                      Add option
+                      Ajouter un candidat 
                     <FontAwesomeIcon icon={faPlus} style={{ marginLeft: 15 }} />
                   </Button>
                 </div>
@@ -244,14 +244,14 @@ const App = (props, context) => {
                     lineHeight: '1.5',
                     marginBottom: '0.125rem'
                   }}
-                  >Voters
+                  >Electeurs
                   </label>
 
                 </div>
                 <div style={{ textAlign: 'initial', marginTop: 15, marginLeft: 15, marginBottom: 25 }}>
                   <Button
                     style={{ width: 150 }}
-                    label='Add voters'
+                    label='Ajouter'
                     onClick={() => fileInput.click()}
                     variant='neutral'
                   />
@@ -292,7 +292,7 @@ const App = (props, context) => {
               <div style={{ marginTop: 50, display: 'flex', width: '60%', justifyContent: 'flex-end' }}>
                 <Button
                   style={{ width: 150 }}
-                  label='Create'
+                  label='Créer'
                   onClick={createVoting}
                   variant='brand'
                 />
