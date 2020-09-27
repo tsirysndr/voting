@@ -4,16 +4,16 @@ import { Container } from './styles/AppMenuStyles'
 const AppMenu = (props) => (
   <Container>
     <div style={{
-      color: '#ff0090',
+      color: '#ffffff',
       fontFamily: 'Product Sans Bold',
-      fontSize: 25,
+      fontSize: 24,
       height: 50,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center'
     }}
     >
-      Voting dApp
+      Voting App
     </div>
   </Container>
 )

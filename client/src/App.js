@@ -114,14 +114,12 @@ const App = (props, context) => {
 
   return (
     <div className='App'>
-      <AppMenu />
-      <div style={{ width: 'calc(100vw - 240px)' }}>
+      <div style={{ width: '100%' }}>
         <Navbar address={address} />
         <div style={{
           boxShadow: 'inset 20px 20px 30px rgba(0,0,0,0.05)',
-          height: 'calc(100vh - 50px - 4rem)',
+          height: 'auto',
           paddingBottom: '4rem',
-          overflowY: 'scroll'
         }}
         >
           <div style={{
@@ -131,7 +129,7 @@ const App = (props, context) => {
             maxWidth: 920
           }}
           >
-            <Card style={{ display: 'flex', minHeight: 'calc(100vh - 150px)', border: 'none', paddingBottom: 60, alignItems: 'center', flexDirection: 'column' }}>
+            <Card style={{ display: 'flex', minHeight: 'calc(100vh - 900px)', border: 'none', paddingBottom: 60, alignItems: 'center', flexDirection: 'column' }}>
               <div style={{
                 color: '#9cc717',
                 height: 80,

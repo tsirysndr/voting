@@ -23,6 +23,7 @@ const Voting = (props, context) => {
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
   const [selected, setSelected] = useState(null)
+  const [open, setOpen] = useState(false)
 
   const loadContract = () => {
     if (props.drizzleStatus.initialized && props.match && props.match.params && props.match.params.address) {
@@ -87,14 +88,12 @@ const Voting = (props, context) => {
 
   return (
     <div className='App'>
-      <AppMenu />
-      <div style={{ width: 'calc(100vw - 240px)' }}>
+      <div style={{ width: '100%' }}>
         <Navbar address={address} />
         <div style={{
           boxShadow: 'inset 20px 20px 30px rgba(0,0,0,0.05)',
-          height: 'calc(100vh - 50px - 4rem)',
+          height: 'auto',
           paddingBottom: '4rem',
-          overflowY: 'scroll'
         }}
         >
           <div style={{
@@ -104,7 +103,7 @@ const Voting = (props, context) => {
             maxWidth: 920
           }}
           >
-            <Card style={{ display: 'flex', minHeight: 'calc(100vh - 150px)', border: 'none', paddingBottom: 60, alignItems: 'center', flexDirection: 'column' }}>
+            <Card style={{ display: 'flex', minHeight: 'calc(100vh - 100px)', border: 'none', paddingBottom: 60, alignItems: 'center', flexDirection: 'column' }}>
               <div style={{
                 color: '#9cc717',
                 height: 80,
@@ -120,14 +119,51 @@ const Voting = (props, context) => {
               <List className="md-cell md-paper md-paper--1">
                 {
                   proposals.map((item, index) => <ListItem 
-                    onClick={() => onVote(item, index)} 
-                    primaryText={item.name}
-                    style={{ backgroundColor: selected === index ? '#01b6f51a' : 'initial' }} 
-                    rightIcon={selected === index ? <FontAwesomeIcon icon={faCheckCircle}  color='#01b6f5'/> : null } 
+                  onClick={() => { setOpen(true) } } 
+                  primaryText={item.name}
+                  style={{ backgroundColor: selected === index ? '#01b6f51a' : 'initial',border: '2px' , borderRadius: '10px' }} 
+                  rightIcon={selected === index ? <FontAwesomeIcon icon={faCheckCircle}  color='#01b6f5'/> : null } 
                   />)
                 }
                 </List>
             </Card>
+            <Modal
+                    title='Voulez-vous confirmer ce choix? '
+                    isOpen={open}
+                    onRequestClose={() => { setOpen(false) }}
+                    footer={
+                    
+                
+                    <div className='rainbow-flex rainbow-justify_end' style={{
+                        position: 'relative',
+                        marginRight: '160px'
+
+                    }}>
+                        
+                        <Button
+                        form='redux-form-id'
+                        className='rainbow-m-right_large'
+                        label='Cancel'
+                        variant='neutral'
+                        onClick={() => { setOpen(false) }}
+                        style={{
+                          position: 'relative',
+                          marginRight: '38px'
+
+                      }}
+                        />
+                        <Button
+                        form='redux-form-id'
+                        label='OK'
+                        variant='brand'
+                        type='submit'
+                        onClick={() => {  proposals.map((item, index) => onVote(item, index))
+                          setOpen(false) }}
+                        />
+          
+          </div>
+        }
+      />
           </div>
         </div>
       </div>

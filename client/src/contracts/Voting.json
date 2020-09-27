@@ -6784,7 +6784,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-09-13T13:13:43.857Z",
+  "updatedAt": "2020-09-27T17:16:27.696Z",
   "devdoc": {
     "methods": {
       "winningProposal()": {

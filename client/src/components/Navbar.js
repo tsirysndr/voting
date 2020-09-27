@@ -3,7 +3,7 @@ import { Container } from './styles/NavbarStyles'
 
 const Navbar = (props) => (
   <Container>
-    {props.address}
+    <p >{props.address}</p> 
   </Container>
 )
 
